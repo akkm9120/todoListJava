@@ -1,0 +1,88 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// Define the TodoItem class
+class TodoItem {
+    private String title;
+    private boolean completed;
+
+    public TodoItem(String title) {
+        this.title = title;
+    }
+
+    public TodoItem() {
+        this.title = "New Task";
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+}
+
+// Define the TodoList class
+class TodoList {
+    private ArrayList<TodoItem> todoItems;
+
+    public TodoList() {
+        this.todoItems = new ArrayList<>();
+    }
+
+    public void addItem(TodoItem item) {
+        todoItems.add(item);
+    }
+
+    public void removeItem(TodoItem item) {
+        todoItems.remove(item);
+    }
+
+    public ArrayList<TodoItem> getTodoItems() {
+        return todoItems;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String response = "Y";
+
+        // Create a new TodoList
+        TodoList todoList = new TodoList();
+
+        while (response.equalsIgnoreCase("Y")) {
+         
+
+            System.out.print("Enter a Task Name : ");
+            TodoItem task = new TodoItem(sc.nextLine());
+            todoList.addItem(task);
+
+            // Print out the TodoItems
+            for (TodoItem item : todoList.getTodoItems()) {
+                System.out.println(item.getTitle());
+            }
+
+            System.out.println("\nDo You Wanna Add More Tasks? (Y/N)");
+            response = sc.nextLine();
+          
+          if (response.equalsIgnoreCase("Y")) {
+              System.out.print("\033[H\033[2J");
+              System.out.flush();
+          }
+          
+
+
+        }
+    }
+}
